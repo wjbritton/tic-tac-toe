@@ -1,2 +1,111 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+$white: #000;
+$red: #f00;
+$orange: #ffa500;
+$redtint: rgba(255, 0, 0, .3);
+$reddarktint: rgba(232, 254, 0, .8);
+$bluetint: rgba(0, 0, 255, .3);
+$yellowtint: rgba(255, 255, 0, .3);
+$teal: #37cfcb;
+$yellow: #ff0;
+$clear: rgba(0, 0, 0, .3);
+
+.c1 {
+  background-color: $redtint;
+}
+
+.c2 {
+  background-color: $yellowtint;
+}
+
+.button {
+  color: $white;
+  line-height: 200%;
+  padding: 10%;
+}
+
+.hidden {
+  display: none;
+  padding: 10%;
+  vertical-align: middle;
+ }
+
+.makeboard {
+  padding: 2% 0 0;
+}
+
+
+
+body {
+  background-image: url('http://i.imgur.com/298EpGt.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+}
+
+.squarebox {
+  border-radius: 50%;
+  left: 45%;
+  margin-left: -100px;
+  margin-top: -50px;
+  position: fixed;
+  top: 40%;
+  }
+
+.square {
+  border-radius: 20%;
+  float: left;
+  height: 130px;
+  left: 9px;
+  margin: 1px;
+  position: relative;
+  top: 9px;
+  width: 130px;
+
+  :nth-child(n) {
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-name: rotate;
+    transform: rotate(360deg);
+    transition: 1.5s linear ease-in-out;
+  		}
+}
+
+.squarecut {
+  border: $white 5px double;
+  color: $white;
+  font-size: 50px;
+  height: 130px;
+  left: -2px;
+  padding: 2px;
+  position: relative;
+  text-align: justify;
+  top: -2px;
+  width: 130px;
+}
+
+@keyframes rotate {
+  0% {transform: rotate(0deg);}
+  5% {transform: rotate(0deg);}
+  10% {transform: rotate(0deg);}
+  15% {transform: rotate(135deg);}
+  20% {transform: rotate(135deg);}
+  25% {transform: rotate(135deg);}
+  30% {transform: rotate(180deg);}
+  35% {transform: rotate(180deg);}
+  40% {transform: rotate(105deg);}
+  45% {transform: rotate(105deg);}
+  50% {transform: rotate(105deg);}
+  55% {transform: rotate(135deg);}
+  60% {transform: rotate(360deg);}
+  65% {transform: rotate(210deg);}
+  70% {transform: rotate(210deg);}
+  75% {transform: rotate(210deg);}
+  80% {transform: rotate(45deg);}
+  85% {transform: rotate(0deg);}
+  90% {transform: rotate(0deg);}
+  95% {transform: rotate(90deg);}
+  100% {transform: rotate(360deg);}
+}
