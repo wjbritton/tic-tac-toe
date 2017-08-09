@@ -16,13 +16,13 @@
     <!-- Page 1 -->
 
         <div class="container-fluid col-md-2" id="page1">
-            <button id='guest'>Play as Guest</button>
-            <button id='record'>Play Online</button>
+            <button class="btn btn-primary" id='guest'>Play as Guest</button>
+            <button class="btn btn-primary" id='record'>Play Online</button>
         </div>
 
     <!-- makeboard -->
     <div class="hidden button" id="restartDiv">
-      <button class="btn btn-primary" id="restart"> New Game?</button>
+      <button class="btn btn-primary" id="restart"> Save and Start New Game?</button>
     </div>
 
     <div class="squarebox hidden" id='makeboard'>
@@ -40,17 +40,16 @@
 		</div>
 
     <div id="recordBtn" class="hidden">
-      <button id="registerBtn">Register</button>
-      <button id="loginBtn">Login</button>
+      <button class="btn btn-primary" id="registerBtn">Register</button>
+      <button class="btn btn-primary" id="loginBtn">Login</button>
     </div>
 
 
     <div id="register" class="hidden">
-          <h2>Register Account Player1</h2>
+          <h2>Register Account Player</h2>
             <form>
-              <p>Email</p><input name="credentials[email]" type="text" value="" required>
-              <p>Password</p><input name="credentials[password]" type="password" value="" required>
-              <p>Confirm Password</p><input name="credentials[password_confirmation]" type="password" value="" required>
+              <p>Email</p><input name="credentials[email]" type="text" id="emailReg" value="" required>
+              <p>Password</p><input name="credentials[password]" type="password" id="passwordReg" value="" required>
               <br>
               <input type="submit" value="Submit"/>
             </form>
@@ -65,5 +64,9 @@
               <input type="submit" value="Submit"/>
             </form>
     </div>
+    <div id="result" class="hidden">
+      <h1 id="resulth1"></h1>
+    </div>
+
  </body>
 </html>

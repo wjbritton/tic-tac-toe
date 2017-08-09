@@ -18,20 +18,19 @@ const master = [
   {id: '3B', mark: ''},
   {id: '3C', mark: ''}
 ]
-// const winLogic = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [2, 4, 6], [0, 4, 8]]
+
 //  Turn Count
-let countTurns = 1
+let countTurns
 
 console.log('Hello World')
 
 $(window).on('load', startGameButton)
 
-//  Make Board
-
+// Closing Start On
 function startGameButton () {
+  countTurns = 1
   //  Show Board P1
   $('#guest').one('click', function showboard () {
-    alert('Make Board')
     $('#makeboard').removeClass('hidden')
     $('#page1').addClass('hidden')
   })
@@ -54,6 +53,11 @@ function startGameButton () {
     $('#recordBtn').addClass('hidden')
   })
 
+  // Restart
+  $('#restart').one('click', restart)
+}
+
+function boardClick () {
   for (let i = 0; i < 9; i++) {
     const index = master[i].id
     $('#' + index).one('click', function mark () {
@@ -62,119 +66,138 @@ function startGameButton () {
       if (countTurns % 2 === 0) {
         $(this).html('X')
         master[i].mark = 1
+        console.log('BFOR' + countTurns)
         countTurns++
-        if (countTurns === 10) {
-          alert(countTurns, 'Tie Game')
-        } else {
-          if (countTurns > 4) {
-            checkForWin()
-          }
-        }
+        console.log('AFTER' + countTurns)
+        checkForWin()
       } else {
         $(this).html('O')
         master[i].mark = 0
+        console.log('BFOR' + countTurns)
         countTurns++
-        if (countTurns === 10) {
-        } else {
-          if (countTurns > 4) {
-            alert('checkForWin')
-            checkForWin()
-          }
-        }
+        console.log('AFTER' + countTurns)
+        checkForWin()
       }
     })
   }
-
-  function checkForWin () {
-    // for (let i = 0; i < winLogic.length; i++) {
-    //   const index = winLogic[i]
-    //   console.log(index[0].mark)
-    //   if (master[index[0]].mark === 0 && master[index[1]].mark === 0 && master[index[2]].mark === 0) {
-    //     endGameO()
-    //   }
-    //   if (master[index[0]].mark === 1 && master[4].mark === 1 && master[6].mark === 1) {
-    //     endGameX()
-    //   }
-    // }
-
-    // Top Row
-    if (master[0].mark === 0 && master[1].mark === 0 && master[2].mark === 0) {
-      endGameO()
-      alert('O')
-    }
-    if (master[0].mark === 1 && master[1].mark === 1 && master[2].mark === 1) {
-      endGameX()
-      alert('X')
-    }
-    // Middle Row
-    if (master[3].mark === 0 && master[4].mark === 0 && master[5].mark === 0) {
-      endGameO()
-      alert('O')
-    }
-    if (master[3].mark === 1 && master[4].mark === 1 && master[5].mark === 1) {
-      endGameX()
-      alert('X')
-    }
-    // Bottom Row
-    if (master[6].mark === 0 && master[7].mark === 0 && master[8].mark === 0) {
-      endGameO()
-      alert('O')
-    }
-    if (master[6].mark === 1 && master[7].mark === 1 && master[8].mark === 1) {
-      endGameX()
-      alert('X')
-    }
-    // Left Column
-    if (master[0].mark === 0 && master[3].mark === 0 && master[6].mark === 0) {
-      endGameO()
-      alert('O')
-    }
-    if (master[0].mark === 1 && master[3].mark === 1 && master[6].mark === 1) {
-      endGameX()
-      alert('X')
-    }
-    // Middle Comlumn
-    if (master[1].mark === 0 && master[4].mark === 0 && master[7].mark === 0) {
-      endGameO()
-      alert('O')
-    }
-    if (master[1].mark === 1 && master[4].mark === 1 && master[7].mark === 1) {
-      endGameX()
-      alert('X')
-    }
-    // Right Column
-    if (master[2].mark === 0 && master[5].mark === 0 && master[8].mark === 0) {
-      endGameO()
-      alert('O')
-    }
-    if (master[2].mark === 1 && master[5].mark === 1 && master[8].mark === 1) {
-      endGameX()
-      alert('X')
-    }
-    // Left Down Right
-    if (master[0].mark === 0 && master[4].mark === 0 && master[8].mark === 0) {
-      endGameO()
-      alert('O')
-    }
-    if (master[0].mark === 1 && master[4].mark === 1 && master[8].mark === 1) {
-      endGameX()
-      alert('X')
-    }
+}
+function checkForWin () {
+  // Top Row
+  if (master[0].mark === 0 && master[1].mark === 0 && master[2].mark === 0) {
+    endGameO()
   }
-  //   // Right Down Left
+  if (master[0].mark === 1 && master[1].mark === 1 && master[2].mark === 1) {
+    endGameX()
+  }
+  // Middle Row
+  if (master[3].mark === 0 && master[4].mark === 0 && master[5].mark === 0) {
+    endGameO()
+  }
+  if (master[3].mark === 1 && master[4].mark === 1 && master[5].mark === 1) {
+    endGameX()
+  }
+  // Bottom Row
+  if (master[6].mark === 0 && master[7].mark === 0 && master[8].mark === 0) {
+    endGameO()
+  }
+  if (master[6].mark === 1 && master[7].mark === 1 && master[8].mark === 1) {
+    endGameX()
+  }
+  // Left Column
+  if (master[0].mark === 0 && master[3].mark === 0 && master[6].mark === 0) {
+    endGameO()
+  }
+  if (master[0].mark === 1 && master[3].mark === 1 && master[6].mark === 1) {
+    endGameX()
+  }
+  // Middle Comlumn
+  if (master[1].mark === 0 && master[4].mark === 0 && master[7].mark === 0) {
+    endGameO()
+  }
+  if (master[1].mark === 1 && master[4].mark === 1 && master[7].mark === 1) {
+    endGameX()
+  }
+  // Right Column
+  if (master[2].mark === 0 && master[5].mark === 0 && master[8].mark === 0) {
+    endGameO()
+  }
+  if (master[2].mark === 1 && master[5].mark === 1 && master[8].mark === 1) {
+    endGameX()
+  }
+  // Left Down Right
+  if (master[0].mark === 0 && master[4].mark === 0 && master[8].mark === 0) {
+    endGameO()
+  }
+  if (master[0].mark === 1 && master[4].mark === 1 && master[8].mark === 1) {
+    endGameX()
+  }
+  if (countTurns > 10) {
+    tie()
+  }
+}
+//   // Right Down Left
 
   function endGameO () {
     $('body').css('background-image', 'url(http://i.imgur.com/8GuZnih.jpg)')
-    $('#makeBoard').addClass('hidden')
+    $('#makeboard').addClass('hidden')
     $('#restDiv').removeClass('hidden')
+    $('#restartDiv').removeClass('hidden')
+    $('#result').removeClass('hidden')
+    $('#resulth1').text('O Wins!')
+    countTurns = 1
   }
 
   function endGameX () {
     $('body').css('background-image', 'url(http://i.imgur.com/20hbFw4.jpg)')
-    $('#makeBoard').addClass('hidden')
+    $('#makeboard').addClass('hidden')
     $('#restDiv').removeClass('hidden')
+    $('#restartDiv').removeClass('hidden')
+    $('#result').removeClass('hidden')
+    $('#resulth1').text('X Wins!')
+    countTurns = 1
   }
-// Closing Start On
-}
 
+  function tie () {
+    $('body').css('background-image', 'url(http://i.imgur.com/ZqMyxK8.jpg)')
+    $('#makeboard').addClass('hidden')
+    $('#restDiv').removeClass('hidden')
+    $('#restartDiv').removeClass('hidden')
+    $('#result').removeClass('hidden')
+    $('#resulth1').text('Cats Game')
+    countTurns = 1
+  }
+
+  function restart () {
+    // run game export
+    // clear Board
+    for (let i = 0; i < 9; i++) {
+      master[i].mark = ''
+      console.log([i].mark)
+    }
+    console.log(master)
+    console.log(countTurns, 'turns')
+    $('.squarecut').html('')
+    $('#restartDiv').addClass('hidden')
+    $('#result').addClass('hidden')
+    $('#makeboard').removeClass('hidden')
+    startGameButton()
+  }
+  // API Functions
+
+  // POST UN/PW
+// $('#register').submit()
+//   function postUnPw () {
+//     console.log('Register')
+//     let email = $('#regEmail').val()
+//     let password = $('#passwordReg').val()
+//     $.ajax({
+//       type: 'POST',
+//       url: 'tic-tac-toe.wdibos.com',
+//       data: {email, password},
+//       success: function (response) {
+//         console.log(response)
+//       }
+//     })
+//   }
+boardClick()
 require('./example')

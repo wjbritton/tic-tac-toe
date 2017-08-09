@@ -1,7 +1,7 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
-$white: #000;
+$black: #000;
 $red: #f00;
 $orange: #ffa500;
 $redtint: rgba(255, 0, 0, .3);
@@ -11,6 +11,8 @@ $yellowtint: rgba(255, 255, 0, .3);
 $teal: #37cfcb;
 $yellow: #ff0;
 $clear: rgba(0, 0, 0, .3);
+$white: #fff;
+
 
 .c1 {
   background-color: $redtint;
@@ -21,7 +23,7 @@ $clear: rgba(0, 0, 0, .3);
 }
 
 .button {
-  color: $white;
+  color: $black;
   line-height: 200%;
   padding: 10%;
 }
@@ -43,6 +45,14 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
+}
+
+p {
+  color: $white;
+}
+
+h2 {
+  color: $white;
 }
 
 .squarebox {
@@ -74,14 +84,14 @@ body {
 }
 
 .squarecut {
-  border: $white 5px double;
-  color: $white;
+  border: $black 5px double;
+  color: $yellow;
   font-size: 50px;
   height: 130px;
   left: -2px;
   padding: 2px;
   position: relative;
-  text-align: justify;
+  text-align: center;
   top: -2px;
   width: 130px;
 }
