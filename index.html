@@ -12,14 +12,61 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body class="container-fluid">
-      <h1>Example</h1>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
-    </body>
+    <!-- Page 1 -->
+
+        <div class="container-fluid col-md-2" id="page1">
+            <button class="btn btn-primary" id='guest'>Play as Guest</button>
+            <button class="btn btn-primary" id='record'>Play Online</button>
+        </div>
+
+    <!-- makeboard -->
+    <div class="hidden button" id="restartDiv">
+      <button class="btn btn-primary" id="restart"> Save and Start New Game?</button>
+    </div>
+
+    <div class="squarebox hidden" id='makeboard'>
+			<div class="square"><div class="c1 squarecut" id="1A"></div></div>
+			<div class="square"><div class="c2 squarecut" id="1B"></div></div>
+			<div class="square"><div class="c1 squarecut" id="1C"></div></div>
+			<br/>
+			<div class="square"><div class="c2 squarecut" id="2A"></div></div>
+			<div class="square"><div class="c1 squarecut" id="2B"></div></div>
+			<div class="square"><div class="c2 squarecut" id="2C"></div></div>
+			<br/>
+			<div class="square"><div class="c1 squarecut" id="3A"></div></div>
+			<div class="square"><div class="c2 squarecut" id="3B"></div></div>
+			<div class="square"><div class="c1 squarecut" id="3C"></div></div>
+		</div>
+
+    <div id="recordBtn" class="hidden">
+      <button class="btn btn-primary" id="registerBtn">Register</button>
+      <button class="btn btn-primary" id="loginBtn">Login</button>
+    </div>
+
+
+    <div id="register" class="hidden">
+          <h2>Register Account Player</h2>
+            <form>
+              <p>Email</p><input name="credentials[email]" type="text" id="emailReg" value="" required>
+              <p>Password</p><input name="credentials[password]" type="password" id="passwordReg" value="" required>
+              <br>
+              <input id="register" type="submit" value="Submit"/>
+            </form>
+    </div>
+
+    <div id="login" class="hidden">
+          <h2>Login Player1</h2>
+            <form>
+              <p>Email</p><input id="regEmail" name="credentials[email]" type="text" placeholder="Email" required>
+              <p>Password</p><input id="regPassword" name="credentials[password]" type="password" placeholder="Email" required>
+              <br>
+              <input type="submit" value="Submit"/>
+            </form>
+    </div>
+    <div id="result" class="hidden">
+      <h1 id="resulth1"></h1>
+    </div>
+
+ </body>
 </html>
