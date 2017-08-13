@@ -1,11 +1,6 @@
 'use strict'
 
-//  const setAPIOrigin = require('../../lib/set-api-origin')
-//  const config = require('./config')
-//
-//  $(() => {
-//    setAPIOrigin(location, config)
-//  })
+// Game Object
 
 const master = [
   {id: '1A', mark: ''},
@@ -21,14 +16,15 @@ const master = [
 
 //  Turn Count
 let countTurns
-
 console.log('Hello World')
 
-$(window).on('load', startGameButton)
+// Make Board On Load
+$(window).on('load', loadBoard)
 
 // Closing Start On
 function startGameButton () {
-  countTurns = 1
+  countTurns = 2
+
   //  Show Board P1
   $('#guest').on('click', function showboard () {
     $('#makeboard').removeClass('hidden')
@@ -61,6 +57,7 @@ function boardClick () {
   for (let i = 0; i < 9; i++) {
     const index = master[i].id
     console.log(index, master)
+
     $('#' + index).one('click', function mark () {
       // Turn Changer and X O Marker
       if (countTurns % 2 === 0) {
@@ -77,6 +74,7 @@ function boardClick () {
     })
   }
 }
+
 function checkForWin () {
   // Top Row
   if (master[0].mark === 0 && master[1].mark === 0 && master[2].mark === 0) {
@@ -127,10 +125,10 @@ function checkForWin () {
   if (master[0].mark === 1 && master[4].mark === 1 && master[8].mark === 1) {
     endGameX()
   }
-  if (master[2].mark === 0 && master[4].mark === 0 && master[7].mark === 0) {
+  if (master[2].mark === 0 && master[4].mark === 0 && master[6].mark === 0) {
     endGameO()
   }
-  if (master[2].mark === 1 && master[4].mark === 1 && master[7].mark === 1) {
+  if (master[2].mark === 1 && master[4].mark === 1 && master[6].mark === 1) {
     endGameX()
   }
   if (countTurns === 10) {
@@ -147,7 +145,6 @@ function endGameO () {
   $('#restartDiv').removeClass('hidden')
   $('#result').removeClass('hidden')
   $('#resulth1').text('O Wins!')
-  // boardClick()
   startGameButton()
   countTurns = 1
 }
@@ -160,7 +157,6 @@ function endGameX () {
   $('#restartDiv').removeClass('hidden')
   $('#result').removeClass('hidden')
   $('#resulth1').text('X Wins!')
-  // boardClick()
   startGameButton()
   countTurns = 1
 }
@@ -172,7 +168,6 @@ function tie () {
   $('#restartDiv').removeClass('hidden')
   $('#result').removeClass('hidden')
   $('#resulth1').text('Cats Game')
-  // boardClick()
   startGameButton()
   countTurns = 1
 }
@@ -191,145 +186,130 @@ function restart () {
   $('#restartDiv').addClass('hidden')
   $('#result').addClass('hidden')
   $('#makeboard').removeClass('hidden')
+  clear()
+  boardClick()
+}
+
+function loadBoard () {
+  boardClick()
+  startGameButton()
+}
+
+function clear () {
+  for (let i = 0; i < 9; i++) {
+    const index = master[i].id
+    $('#' + index).off()
+  }
 }
 
 // API Functions
+const url = 'https://ga-wdi-boston.herokuapp.com'
 
-// api call for registration
-// const addUser = function (data) {
-//   // console.log(data)
-//   return $.ajax({
-//     url: app.host + '/sign-up/',
-//     // headers: { 'header': 'Content-Type: application/json' },
-//     method: 'POST',
-//     data: {
-//       'credentials': {
-//         'email': data.credentials.email,
-//         'password': data.credentials.password,
-//         'password_confirmation': data.credentials.password
-//       }
-//     }
-//     // crossDomain: true
-//   })
-// }
-//
-// // api call for logging in suser
-// const userLogin = function (data) {
-//   /* let userInfo = {
-//       Hello : "Hello World"
-//   } */
-//   // console.log(userInfo)
-//   // console.log(data)
-//   return $.ajax({
-//     url: app.host + '/sign-in/',
-//     method: 'POST',
-//     data: {
-//       'credentials': {
-//         'email': data.credentials.email,
-//         'password': data.credentials.password
-//       }
-//     } /* ,
-//     success: function (response) {
-//       console.log(response.user)
-//       //userInfo = response.user
-//       return userInfo
-//     } */
-//   })
-// }
-//
-// // api call for resetting password
-// const passwordReset = function (data) {
-//   console.log(app.user.token)
-//   // console.log(data)
-//   return $.ajax({
-//     url: app.host + '/change-password/' + app.user.id,
-//     headers: {
-//       Authorization: 'Token token=' + app.user.token
-//     },
-//     method: 'PATCH',
-//     data /* : {
-//       "passwords": {
-//       "old": data.passwords.old,
-//       "new": data.passwords.new
-//     }
-//   } */
-//   })
-// }
-//
-// // api call for logging in
-// const userLogout = function () {
-//   // console.log('something')
-//   return $.ajax({
-//     url: app.host + '/sign-out/' + app.user.id,
-//     headers: {
-//       Authorization: 'Token token=' + app.user.token
-//     },
-//     method: 'DELETE'
-//   })
-// }
-//
-// // api call for starting a new game
-// const getGame = function () {
-//   // console.log ("Hello")
-//   console.log(app.user.token)
-//   return $.ajax({
-//     url: app.host + '/games',
-//     headers: {
-//       Authorization: 'Token token=' + app.user.token
-//     },
-//     method: 'POST',
-//     success: function (response) {
-//       console.log(response)
-//     }
-//     // ail: function (error) {
-//       // console.log(error)
-//       // console.log("Please Log in")
-//     // }
-//   })
-// }
-//
-// /* const index = function() {
-//   return $.ajax ({
-//     url: app.host + '/users',
-//     method: 'GET',
-//     headers: {
-//       Authorization: 'Token token=$TOKEN'
-//     }
-//   })
-// } */
-//
-// // event handler for adding moves to game object
-// const updateMoves = function (index, value, over) {
-//   console.log(app.user.token)
-//   return $.ajax({
-//     url: app.host + '/games/' + app.game.id,
-//     method: 'PATCH',
-//     // dataType: 'jsonp',
-//     headers: {
-//       Authorization: 'Token token=' + app.user.token
-//     },
-//     data: {
-//       'game': {
-//         'cell': {
-//           'index': index,
-//           'value': value
-//         },
-//         'over': over
-//       }
-//     }
-//   })
-// }
-//
-// // event handler for viewing games by user
-// const gameView = function () {
-//   console.log(app.user.token)
-//   return $.ajax({
-//     url: app.host + '/games',
-//     method: 'GET',
-//     headers: {
-//       Authorization: 'Token token=' + app.user.token
-//     }
-//   })
-// }
-boardClick()
-require('./example')
+function register () {
+  getFormFields
+  $.ajax({
+    url: url + '/sign-up',
+    method: 'POST',
+    data: {
+      'credentials': {
+        'email': this.credentials.email,
+        'password': this.credentials.password,
+        'password_confirmation': this.credentials.password
+      }
+    }
+  })
+}
+// Get Form Field Method
+
+const getFormFields = (form) => {
+  const target = {}
+  const elements = form.elements || []
+  for (let i = 0; i < elements.length; i++) {
+    const e = elements[i]
+    if (!e.hasAttribute('name')) {
+      continue
+    }
+
+    let type = 'TEXT'
+    switch (e.nodeName.toUpperCase()) {
+      case 'SELECT':
+        type = e.hasAttribute('multiple') ? 'MULTIPLE' : type
+        break
+      case 'INPUT':
+        type = e.getAttribute('type').toUpperCase()
+        break
+    }
+
+    const name = e.getAttribute('name')
+
+    if (type === 'MULTIPLE') {
+      for (let i = 0; i < e.length; i++) {
+        if (e[i].selected) {
+          addNestedValue(target, name, e[i].value)
+        }
+      }
+    } else if ((type !== 'RADIO' && type !== 'CHECKBOX') || e.checked) {
+      addNestedValue(target, name, e.value)
+    }
+  }
+
+  return target
+}
+
+// API Origin
+
+const setAPIOrigin = (location, config) => {
+  // strip the leading `'?'`
+  const search = parseNestedQuery(location.search.slice(1))
+
+  if (search.environment === 'development' ||
+      (location.hostname === 'localhost' &&
+       search.environment !== 'production')) {
+    if (!(config.apiOrigin = config.apiOrigins.development)) {
+      const port = +('GA'.split('').reduce((p, c) =>
+        p + c.charCodeAt().toString(16), '')
+      )
+      config.apiOrigin = `http://localhost:${port}`
+    }
+  } else {
+    config.apiOrigin = config.apiOrigins.production
+  }
+}
+
+// parseNestedQuery
+
+const parseNestedQuery = queryString =>
+  queryString.split('&')
+    .reduce((memo, element) => {
+      if (element) {
+        const keyValuePair = element.split('=')
+        memo = addNestedValue(memo,
+          decodeURIComponent(keyValuePair[0]),
+          decodeURIComponent(keyValuePair[1]))
+      }
+
+      return memo
+    }, {})
+
+// addNestedValue
+
+const addNestedValue = function (pojo, name, value) {
+  const recurse = function recurse (pojo, keys, value) {
+    const key = keys.shift()
+    const next = keys[0]
+    if (next === '') { // key is an array
+      pojo[key] = pojo[key] || []
+      pojo[key].push(value)
+    } else if (next) { // key is a parent key
+      pojo[key] = pojo[key] || {}
+      recurse(pojo[key], keys, value)
+    } else { // key is the key for value
+      pojo[key] = value
+    }
+
+    return pojo
+  }
+
+  const keys = name.split('[').map((k) => k.replace(/]$/, ''))
+  return recurse(pojo, keys, value)
+}
