@@ -1,4 +1,4 @@
-Link to your hosted game in the URL section of your Github repo.
+https://wjbritton.github.io/tic-tac-toe/
 
 
 Technologies used:
@@ -18,10 +18,12 @@ Node
 
 Document your planning and tell a story about your development process and problem-solving strategy.
 
-List of Steps
+List of Steps:
 Create Board
 Test Board Event Handlers
 Connect Board Event Handlers
+
+
 
 List unsolved problems which would be fixed in future iterations.
 
