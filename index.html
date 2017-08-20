@@ -13,6 +13,21 @@
     </head>
     <body class="container-fluid">
 
+    <!-- logged in header -->
+    <div id="header" class="header hidden">
+      <button class="btn btn-primary nav restart"> Save and Start New Game?</button>
+      <button class="btn btn-primary nav" id="changePassword">Change Password</button>
+      <button class="btn btn-primary nav">View Past Games</button>
+      <button class="btn btn-primary nav">Log Out</button>
+    </div>
+
+    <!-- Guest Header -->
+
+    <div id="headerGuest" class="header hidden">
+      <button class="btn btn-primary nav restart"> Save and Start New Game?</button>
+    </div>
+
+
     <!-- Page 1 -->
 
         <div class="container-fluid col-md-2" id="page1">
@@ -21,9 +36,6 @@
         </div>
 
     <!-- makeboard -->
-    <div class="hidden button" id="restartDiv">
-      <button class="btn btn-primary" id="restart"> Save and Start New Game?</button>
-    </div>
 
     <div class="squarebox hidden" id='makeboard'>
 			<div class="square"><div class="c1 squarecut" id="1A"></div></div>
@@ -44,28 +56,33 @@
       <button class="btn btn-primary" id="loginBtn">Login</button>
     </div>
 
-
+<!-- Register Users -->
     <div id="register" class="hidden">
           <h2>Register Account Player</h2>
-            <form>
-              <p>Email</p><input name="credentials[email]" type="text" id="emailReg" value="" required>
-              <p>Password</p><input name="credentials[password]" type="password" id="passwordReg" value="" required>
+              <p>Email</p><input type="text" id="emailReg" value="" placeholder="email" required>
+              <p>Password</p><input type="password" id="passwordReg" value="" placeholder="password" required>
               <br>
-              <input id="register" type="submit" value="Submit"/>
-            </form>
+              <button id="registerSubmit">Submit</button>
     </div>
 
+<!-- Resetting Password -->
+<div id="passChange" class="hidden">
+    <p>Old Password </p><input type="password" id="passwordOld" value="" placeholder="old password" required>
+    <p>New Password </p><input type="password" id="passwordNew" value="" placeholder="new password" required>
+</div>
+
+<!-- Login -->
     <div id="login" class="hidden">
-          <h2>Login Player1</h2>
-            <form>
-              <p>Email</p><input id="regEmail" name="credentials[email]" type="text" placeholder="Email" required>
-              <p>Password</p><input id="regPassword" name="credentials[password]" type="password" placeholder="Email" required>
+          <h2>Login</h2>
+              <p>Email</p><input id="emailSign" type="text" value="" placeholder="email" required>
+              <p>Password</p><input id="passwordSign" type="password" value="" placeholder="password" required>
               <br>
-              <input type="submit" value="Submit"/>
-            </form>
+              <button id="signInSubmit">Submit</button>
     </div>
-    <div id="result" class="hidden">
-      <h1 id="resulth1"></h1>
+
+  <!-- Win Results -->
+    <div id="result" class="win-result hidden">
+      <p id="results" class="result"></p>
     </div>
 
  </body>

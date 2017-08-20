@@ -13,6 +13,28 @@ $yellow: #ff0;
 $clear: rgba(0, 0, 0, .3);
 $white: #fff;
 
+.nav {
+  margin: 1% 0;
+}
+
+.header {
+  background-color: $yellowtint;
+  color: $yellow;
+  margin: 2%;
+  padding: 1% 12%;
+  text-align: center;
+}
+
+.win-result {
+  text-align: center;
+  text-shadow: 3px 3px $black;
+}
+
+.result {
+  color: $yellow;
+  font-size: 120px;
+  font-weight: 800;
+}
 
 .c1 {
   background-color: $redtint;
@@ -38,13 +60,12 @@ $white: #fff;
   padding: 2% 0 0;
 }
 
-
-
 body {
   background-image: url('http://i.imgur.com/298EpGt.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
+  padding: 10px 0;
 }
 
 p {
@@ -71,6 +92,7 @@ h2 {
   left: 9px;
   margin: 1px;
   position: relative;
+  text-shadow: 3px 3px $black;
   top: 9px;
   width: 130px;
 

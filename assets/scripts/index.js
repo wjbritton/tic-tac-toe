@@ -1,4 +1,13 @@
 'use strict'
+// To Does
+// Tie logic
+// Game State API
+// Count uncompleted games or trash them ?
+// API for game state per turn
+// patch pw with token
+// Visualize Past games
+// Logout API
+// Make admin Page to track API ??
 
 // Game Object
 
@@ -23,35 +32,104 @@ $(window).on('load', loadBoard)
 
 // Closing Start On
 function startGameButton () {
-  countTurns = 2
+  countTurns = 1
+  // Restart Game
+  $('.restart').on('click', restart)
 
+  // Change password
+  // $('#changePassword').on('click', function () {
+  //   $.ajax({
+  //     type: 'POST',
+  //     contentType: 'application/json; charset=utf-8',
+  //     dataType: 'json',
+  //     data: jsonData,
+  //     url: 'http://tic-tac-toe.wdibos.com/sign-up',
+  //     success: function register () {
+  //       console.log('Registered')
+  //       $('#register').addClass('hidden')
+  //       $('#login').removeClass('hidden')
+  //     }
+  //   })
+  // })
   //  Show Board P1
-  $('#guest').on('click', function showboard () {
+  $('#guest').on('click', function () {
     $('#makeboard').removeClass('hidden')
     $('#page1').addClass('hidden')
+    $('#headerGuest').removeClass('hidden')
   })
 
   //  Show Login & Register P1
-  $('#record').on('click', function record () {
+  $('#record').on('click', function () {
     $('#recordBtn').removeClass('hidden')
     $('#page1').addClass('hidden')
   })
 
   // Show Register
-  $('#registerBtn').on('click', function register () {
+  $('#registerBtn').on('click', function () {
     $('#register').removeClass('hidden')
     $('#recordBtn').addClass('hidden')
   })
 
   // Show Login
-  $('#loginBtn').on('click', function login () {
+  $('#loginBtn').on('click', function () {
     $('#login').removeClass('hidden')
     $('#recordBtn').addClass('hidden')
   })
 
   // Restart
-  $('#restart').on('click', restart)
+  $('#registerSubmit').on('click', function () {
+    const valEmail = $('#emailReg').val()
+    const valPw = $('#passwordReg').val()
+    console.log('UN ' + valEmail + ' PW ' + valPw)
+
+    const jsonData = '{ "credentials": { "email": "' + valEmail + '", "password": "' + valPw + '" }}'
+    console.log(jsonData)
+    $.ajax({
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: jsonData,
+      url: 'http://tic-tac-toe.wdibos.com/sign-up',
+      success: function register () {
+        console.log('Registered')
+        $('#register').addClass('hidden')
+        $('#login').removeClass('hidden')
+      }
+    })
+  })
+
+  // Sign In
+
+  $('#signInSubmit').on('click', function () {
+    const valEmail = $('#emailSign').val()
+    const valPw = $('#passwordSign').val()
+    console.log('UN ' + valEmail + ' PW ' + valPw)
+
+    const jsonData = '{ "credentials": { "email": "' + valEmail + '", "password": "' + valPw + '" }}'
+    console.log(jsonData)
+    $.ajax({
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: jsonData,
+      url: 'http://tic-tac-toe.wdibos.com/sign-in',
+      success: function register () {
+        console.log('Signed In')
+        loadBoard()
+        $('#makeboard').removeClass('hidden')
+        $('#login').addClass('hidden')
+        $('#header').removeClass('hidden')
+      }
+    })
+  })
+
+  $('#changePassword').on('click', function () {
+    $('#passChange').removeClass('hidden')
+    $('#makeboard').addClass('hidden')
+  })
 }
+
+// Board Click Handler
 
 function boardClick () {
   for (let i = 0; i < 9; i++) {
@@ -74,6 +152,8 @@ function boardClick () {
     })
   }
 }
+
+// Win Logic
 
 function checkForWin () {
   // Top Row
@@ -137,6 +217,8 @@ function checkForWin () {
   }
 }
 
+// O Game Logic
+
 function endGameO () {
   console.log('O win')
   $('body').css('background-image', 'url(http://i.imgur.com/8GuZnih.jpg)')
@@ -144,10 +226,12 @@ function endGameO () {
   $('#restDiv').removeClass('hidden')
   $('#restartDiv').removeClass('hidden')
   $('#result').removeClass('hidden')
-  $('#resulth1').text('O Wins!')
+  $('#results').text('O Wins!')
   startGameButton()
   countTurns = 1
 }
+
+// X Game Logic
 
 function endGameX () {
   console.log('X win')
@@ -156,10 +240,13 @@ function endGameX () {
   $('#restDiv').removeClass('hidden')
   $('#restartDiv').removeClass('hidden')
   $('#result').removeClass('hidden')
-  $('#resulth1').text('X Wins!')
+  $('#results').text('X Wins!')
   startGameButton()
   countTurns = 1
 }
+
+// Game Tie logic
+
 function tie () {
   console.log('tie')
   $('body').css('background-image', 'url(http://i.imgur.com/ZqMyxK8.jpg)')
@@ -167,10 +254,21 @@ function tie () {
   $('#restDiv').removeClass('hidden')
   $('#restartDiv').removeClass('hidden')
   $('#result').removeClass('hidden')
-  $('#resulth1').text('Cats Game')
+  $('#results').text('Cats Game')
   startGameButton()
   countTurns = 1
 }
+
+// Reset Board Clear
+
+function clear () {
+  for (let i = 0; i < 9; i++) {
+    const index = master[i].id
+    $('#' + index).off()
+  }
+}
+
+// Restart Board
 
 function restart () {
   // run game export
@@ -186,18 +284,15 @@ function restart () {
   $('#restartDiv').addClass('hidden')
   $('#result').addClass('hidden')
   $('#makeboard').removeClass('hidden')
+  $('#passChange').addClass('hidden')
   clear()
   boardClick()
 }
 
+// Load New Board Functcions 1 Cleared 2 Events 3 Visualize
+
 function loadBoard () {
+  clear()
   boardClick()
   startGameButton()
-}
-
-function clear () {
-  for (let i = 0; i < 9; i++) {
-    const index = master[i].id
-    $('#' + index).off()
-  }
 }
